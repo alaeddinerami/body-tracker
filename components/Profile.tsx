@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image,ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 
 const Profile = () => {
   const userData = {
@@ -7,11 +7,11 @@ const Profile = () => {
     age: 28,
     nationality: 'American',
     address: '1234 Elm Street, Springfield',
-    profilePicture: 'https://example.com/path-to-profile-picture.jpg', 
+    profilePicture: '',
   };
 
   return (
-    <ScrollView style={[styles.container,{ flexGrow: 1 }]}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Image source={{ uri: userData.profilePicture }} style={styles.profilePicture} />
       <Text style={styles.name}>{userData.name}</Text>
       <Text style={styles.details}>Age: {userData.age}</Text>
@@ -23,11 +23,10 @@ const Profile = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: 'red',
+    backgroundColor: 'red', 
   },
   profilePicture: {
     width: 100,
@@ -39,11 +38,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
+    color:'white',
+
   },
   details: {
     fontSize: 16,
-    color: '#333',
     marginBottom: 5,
+    color:'white',
+
   },
 });
 

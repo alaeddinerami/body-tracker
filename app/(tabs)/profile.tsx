@@ -23,6 +23,5 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
     paddingHorizontal: 20, 
     backgroundColor: '#1f0404', 
-    color:'white',
   },
 });
