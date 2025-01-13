@@ -1,32 +1,55 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Profile = () => {
-  const userData = {
-    name: 'John Doe',
-    age: 28,
-    nationality: 'American',
-    address: '1234 Elm Street, Springfield',
+  const [userData, setUserData] = useState({
+    firstName: '',
+    age: '',
+    bmi:'',
+    nationality: '',
     profilePicture: '',
-  };
+  });
+
+
+  useEffect(() => {
+    const loadUserData = async () => {
+      try {
+        const storedData = await AsyncStorage.getItem('userProfile');
+        if (storedData) {
+          setUserData(JSON.parse(storedData));
+        }
+      } catch (error) {
+        console.error('Failed to load data from AsyncStorage', error);
+      }
+    };
+
+    loadUserData();
+  }, []); 
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Image source={{ uri: userData.profilePicture }} style={styles.profilePicture} />
-      <Text style={styles.name}>{userData.name}</Text>
-      <Text style={styles.details}>Age: {userData.age}</Text>
-      <Text style={styles.details}>Nationality: {userData.nationality}</Text>
-      <Text style={styles.details}>Address: {userData.address}</Text>
+      {userData.profilePicture ? (
+        <Image source={{ uri: userData.profilePicture }} style={styles.profilePicture} />
+      ) : (
+        <Text style={styles.noProfilePicture}>No profile picture available</Text>
+      )}
+      <Text style={styles.name}>{userData.firstName || 'Name not available'}</Text>
+      <Text style={styles.details}>Age: {userData.age || 'Not specified'} year old</Text>
+      <Text style={styles.details}>Nationality: {userData.nationality || 'Not specified'}</Text>
+      <Text style={styles.details}>BMI: {userData.bmi || 'Not specified'}</Text>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: 'red', 
+    backgroundColor: 'red',
+    minHeight: '100%',
   },
   profilePicture: {
     width: 100,
@@ -34,18 +57,20 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginBottom: 20,
   },
+  noProfilePicture: {
+    color: 'white',
+    marginBottom: 20,
+  },
   name: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
-    color:'white',
-
+    color: 'white',
   },
   details: {
     fontSize: 16,
     marginBottom: 5,
-    color:'white',
-
+    color: 'white',
   },
 });
 

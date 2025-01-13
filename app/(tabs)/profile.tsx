@@ -18,10 +18,10 @@ export default function TabTwoScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center', 
+    flex: 1, 
+    justifyContent: 'center',
     alignItems: 'center', 
     paddingHorizontal: 20, 
-    backgroundColor: '#1f0404', 
+    backgroundColor: '#1f0404',
   },
 });
