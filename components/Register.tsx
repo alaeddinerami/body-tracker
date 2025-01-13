@@ -7,7 +7,6 @@ import {
   StyleSheet,
   Alert,
   ScrollView,
-  KeyboardAvoidingView,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -19,7 +18,6 @@ const RegisterComponent = () => {
     nationality: "",
     weight: "",
     height: "",
-    address: "",
   });
 
   const [bmi, setBmi] = useState(null);
@@ -59,7 +57,7 @@ const RegisterComponent = () => {
       Alert.alert("Error", "Failed to save data.");
     }
   };
-
+  
   return (
     <ScrollView contentContainerStyle={[styles.container, { flexGrow: 1 }]}>
       <Text style={styles.title}>Register Profile</Text>
@@ -103,12 +101,6 @@ const RegisterComponent = () => {
         value={formData.height}
         onChangeText={(value) => handleInputChange("height", value)}
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Address"
-        value={formData.address}
-        onChangeText={(value) => handleInputChange("address", value)}
-      />
       <View style={styles.buttonContainer} >
         <Button title="Calculate BMI" onPress={calculateBMI} color="#cf0404" />
         {bmi && <Text style={styles.bmiText}>Your BMI: {bmi}</Text>}
@@ -128,7 +120,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: "center",
     color: 'white',
-
   },
   input: {
     borderWidth: 1,
@@ -144,6 +135,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20,
     textAlign: "center",
+    color:'white',
   },
   buttonContainer: {
     gap:10,

@@ -5,7 +5,7 @@
 
   export default function HomeScreen() {
     return (
-    <View style={styles.container} >
+    <View style={[styles.container,{ flexGrow: 1 }]} >
       <RegisterComponent/>
     </View>)
   }
